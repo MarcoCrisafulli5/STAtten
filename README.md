@@ -86,9 +86,10 @@ Our code is based on below repositories. Thank you for your valuable works!
 ## Citation <span style="color:blue">📚</span>
 If you find our "Spiking Transformer with Spatial-Temporal Attention" paper useful or relevant to your research, please kindly cite our paper:
   ```bash
-  @article{lee2024spiking,
-    title={Spiking Transformer with Spatial-Temporal Attention},
-    author={Lee, Donghyun and Li, Yuhang and Kim, Youngeun and Xiao, Shiting and Panda, Priyadarshini},
-    journal={arXiv preprint arXiv:2409.19764},
-    year={2024}
-  }
+  @inproceedings{lee2025spiking,
+  title={Spiking transformer with spatial-temporal attention},
+  author={Lee, Donghyun and Li, Yuhang and Kim, Youngeun and Xiao, Shiting and Panda, Priyadarshini},
+  booktitle={Proceedings of the Computer Vision and Pattern Recognition Conference},
+  pages={13948--13958},
+  year={2025}
+}
