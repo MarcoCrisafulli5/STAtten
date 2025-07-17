@@ -1,3 +1,4 @@
+import time
 import torch
 import torch.nn as nn
 from timm.models.layers import trunc_normal_
@@ -122,6 +123,7 @@ class SpikeDrivenTransformer(nn.Module):
         return x, hook
 
     def forward(self, x, hook=None):
+        init_time = time.time()
         if len(x.shape) < 5:
             x = (x.unsqueeze(0)).repeat(self.T, 1, 1, 1, 1)
         else:
@@ -135,6 +137,10 @@ class SpikeDrivenTransformer(nn.Module):
         x = self.head(x)
         if not self.TET:
             x = x.mean(0)
+        
+        end_time = time.time()
+        final_time = end_time - init_time
+        print(f"[Time] - Spikeformer Time time: {final_time:.4f} seconds")
         return x, hook
 
 

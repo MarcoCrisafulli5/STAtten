@@ -1,3 +1,4 @@
+import time
 import torch.nn as nn
 from spikingjelly.clock_driven.neuron import (
     MultiStepLIFNode,
@@ -55,6 +56,7 @@ class MS_SPS(nn.Module):
 
 
     def forward(self, x, hook=None):
+        init_time_psm = time.time()
         T, B, _, H, W = x.shape
         ratio = 1
         x = self.proj_conv(x.flatten(0, 1))  # have some fire value
@@ -92,15 +94,21 @@ class MS_SPS(nn.Module):
         if self.pooling_stat[3] == "1":
             x = self.maxpool3(x)
             ratio *= 2
+        end_time_psm = time.time()
+        print(f"[Time] - SPS.PSM: {end_time_psm - init_time_psm:.4f} seconds")
 
+        init_time_RPE = time.time()
         x_feat = x
         x = self.proj_lif3(x.reshape(T, B, -1, H // ratio, W // ratio).contiguous())
         if hook is not None:
-            hook[self._get_name() + "_lif3"] = x.detach()
+            hook[self._get_name() + "_lif3"] = x.detach()  
         x = x.flatten(0, 1).contiguous()
         x = self.rpe_conv(x)
         x = self.rpe_bn(x)
         x = (x + x_feat).reshape(T, B, -1, H // ratio, W // ratio).contiguous()
-
+        
         H, W = H // self.patch_size[0], W // self.patch_size[1]
+        
+        end_time_RPE = time.time()
+        print(f"[Time] - SPS.RPE: {end_time_RPE - init_time_RPE:.4f} seconds")
         return x, (H, W), hook
