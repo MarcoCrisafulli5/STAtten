@@ -9,9 +9,9 @@ https://github.com/MarcoCrisafulli5/STAtten_profiler
 
 ## Modified Files:
 ```
-/model/spikeformer.py # now includes timers in the forward function call
-/module/sps.py # now includes times to measure the execution time of the sps block and its sub blocks
-/module/ms_conv.py # now includes timers to measure the Encoder execution time and sparsity is measured in different points inside the encoder block
+/model/spikeformer.py   # now includes timers in the forward function call
+/module/sps.py   # now includes times to measure the execution time of the sps block and its sub blocks
+/module/ms_conv.py   # now includes timers to measure the Encoder execution time and sparsity is measured in different points inside the encoder block
 ```
 
 ## The Output
