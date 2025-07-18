@@ -1,3 +1,30 @@
+# Fork of the STAtten project
+This modified version of the STAtten model includes timers and sparsity measuring solutions inside the model with the aim of profilation.
+When executed through the model.ipynb the output generated is aggregated in .txt files that are then read and elaborated with other scripts that can be found here:
+
+<link>
+https://github.com/MarcoCrisafulli5/STAtten_profiler
+</link>
+
+
+## Modified Files:
+```
+/model/spikeformer.py # now includes timers in the forward function call
+/module/sps.py # now includes times to measure the execution time of the sps block and its sub blocks
+/module/ms_conv.py # now includes timers to measure the Encoder execution time and sparsity is measured in different points inside the encoder block
+```
+
+## The Output
+The output .txt files that were mentioned before are present in this repo for representation purpose and are not the ones used to analyze the data. The generic structure of the files is similar to those used in my other <link src="https://github.com/MarcoCrisafulli5/STAtten_profiler">project</link>.
+```
+capcifar.txt   # generic capture using CIFAR dataset
+capcifar3.txt   # generic capture using CIFAR dataset
+capcifarTensRandn.txt   # generic capture using RANDOM tensor generated 
+```
+
+
+
+
 # STAtten: Spiking Transformer with Spatial-Temporal Attention [[Paper]](https://arxiv.org/pdf/2409.19764)
 ### ***Conference on Computer Vision and Pattern Recognition (CVPR), 2025***
 
